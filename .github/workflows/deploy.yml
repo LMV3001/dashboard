@@ -2,11 +2,12 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: ['main'] # Vérifie que ta branche s'appelle bien main (ou master)
+    branches: ['main']
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # On force le nom de l'image en minuscules ici
+  IMAGE_NAME: lmv3001/dashboard
 
 jobs:
   build-and-push:
@@ -31,4 +32,5 @@ jobs:
         with:
           context: .
           push: true
+          # On utilise l'image name en minuscules
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
