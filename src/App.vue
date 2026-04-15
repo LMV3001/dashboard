@@ -1,20 +1,30 @@
 <script setup lang="ts">
-const objet = {
-  class: 'maclass',
-  id: 'monid',
-}
+import { computed, reactive, ref, watch } from 'vue'
 
-const name = 'michel'
+const product = reactive({
+  quantity: 0,
+  price: 10,
+  name: 't-shirt',
+})
 
-function userClick() {
-  console.log('click')
-}
+const text = ref('')
+
+const prixTotalHt = computed(() => product.quantity * product.price)
+const prixTotalTtc = computed(() => prixTotalHt.value * 1.2)
+
+watch([prixTotalHt, prixTotalTtc], ([newHt, newTtc], [oldHt, oldTtc]) => {
+  text.value = 'les données ont changé'
+})
 </script>
 
 <template>
   <header>
     <nav></nav>
-    <h1 @click="userClick" v-bind="objet">hello world {{ name }}</h1>
+    <input type="number" v-model="product.quantity" />
+    <input type="number" v-model="product.price" />
+    <h1>prix total ht :{{ prixTotalHt }}</h1>
+    <h1>prix total ttc :{{ prixTotalTtc }}</h1>
+    <p>{{ text }}</p>
   </header>
 </template>
 
