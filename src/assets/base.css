@@ -1,1 +1,7 @@
-
+:root {
+  --color-primary: #137c8b;
+  --color-secondary: #709ca7;
+  --color-background: #7a90a4;
+  --color-text: #b8cbd0;
+  --color-text-light: #344d59;
+}
